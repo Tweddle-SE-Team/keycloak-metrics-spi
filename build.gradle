@@ -10,8 +10,14 @@ configurations {
     bundleLib
 }
 
+project.ext {
+    keycloakVersion = '4.5.0.Final'
+    prometheusVersion = '0.6.0'
+    jaxrsVersion = '1.0.0.Final'
+}
+
 group 'org.jboss.aerogear'
-version '1.0.1-SNAPSHOT'
+version '4.5.0'
 
 apply plugin: 'java'
 
@@ -22,14 +28,13 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.keycloak', name: 'keycloak-server-spi-private', version: '3.2.1.Final'
-    compile group: 'org.keycloak', name: 'keycloak-server-spi', version: '3.2.1.Final'
-    compile group: 'org.keycloak', name: 'keycloak-services', version: '3.2.1.Final'
-    compile group: 'org.jboss.spec.javax.ws.rs', name: 'jboss-jaxrs-api_2.0_spec', version: '1.0.0.Final'
-    bundleLib group: 'io.prometheus', name: 'simpleclient_common', version: '0.3.0'
-    bundleLib group: 'io.prometheus', name: 'simpleclient_hotspot', version: '0.3.0'
+    compile "org.keycloak:keycloak-server-spi-private:${keycloakVersion}"
+    compile "org.keycloak:keycloak-server-spi:${keycloakVersion}"
+    compile "org.keycloak:keycloak-services:${keycloakVersion}"
+    compile "org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.1_spec:${jaxrsVersion}"
+    bundleLib "io.prometheus:simpleclient_common:${prometheusVersion}"
+    bundleLib "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
     configurations.compile.extendsFrom(configurations.bundleLib)
-
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
